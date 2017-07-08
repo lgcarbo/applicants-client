@@ -5,7 +5,11 @@ import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apol
 import pageReducer from './reducers/pageReducer';
 import AppContainer from './containers/AppContainer';
 
-const apolloClient = new ApolloClient();
+const apolloClient = new ApolloClient({
+  networkInterface: createNetworkInterface({
+    uri: 'https://applicants-server.herokuapp.com/graphql'
+  }),
+});
 
 const store = createStore(
   combineReducers({
