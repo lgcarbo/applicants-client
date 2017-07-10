@@ -56,13 +56,41 @@ export default class DataPage extends React.Component {
     }
 
     render() {
-        const { data: { loading, error, Applicant } } = this.props;
+        
+        let Applicant = {};
 
-        if(loading) {
-            return <p>Loading...</p>;
+        if(this.props.data) {
+            const { data: { loading, error } } = this.props;
+
+            if(loading) {
+                return <p>Loading...</p>;
+            }
+            if(error) {
+                return <p>{error.message}</p>;
+            }
+            Object.assign(Applicant, this.props.data.Applicant);
         }
-        if(error) {
-            return <p>{error.message}</p>;
+        else {
+            Object.assign(Applicant, {
+                LastName: '',
+                FirstName: '',
+                BirthDate: '',
+                Email: '',
+                EducationLevel: {
+                    EducationLevelId: 1
+                },
+                EducationLevelFinished: 0,
+                YearsOfExperience: 0,
+                IsWorking: 0,
+                SalaryType: {
+                    SalaryTypeId: 1
+                },
+                DesiredSalary: 0,
+                ContractType: {
+                    ContractTypeId: 1
+                },
+                TechnicalSkills: []
+            });
         }
 
         return (
@@ -78,11 +106,11 @@ export default class DataPage extends React.Component {
                     </Row>
                     <Row>
                         <Col md={4}><EducationLevelContainer id="fgEducationLevelId" label="Education Level" placeholder="Enter Education Level" defaultValue={Applicant.EducationLevel.EducationLevelId}/></Col>
-                        <Col md={4}><CheckGroup id="fgEducationLevelFinished" label="Finished" defaultChecked={Applicant.EducationLevelFinished == 1}/></Col>
+                        <Col md={4}><CheckGroup id="fgEducationLevelFinished" label="Finished" defaultChecked={Applicant.EducationLevelFinished === 1}/></Col>
                     </Row>
                     <Row>
                         <Col md={4}><FieldGroup id="fgYearsOfExperience" type="text" label="Years of Experience" placeholder="Enter Years of Experience" defaultValue={Applicant.YearsOfExperience}/></Col>
-                        <Col md={4}><CheckGroup id="fgIsWorking" label="Is Working" defaultChecked={Applicant.IsWorking == 1}/></Col>
+                        <Col md={4}><CheckGroup id="fgIsWorking" label="Is Working" defaultChecked={Applicant.IsWorking === 1}/></Col>
                     </Row>
                     <Row>
                         <Col md={4}><SalaryTypeContainer id="fgSalaryTypeId" label="Salary Type" placeholder="Select Salary Type" defaultValue={Applicant.SalaryType.SalaryTypeId}/></Col>                    

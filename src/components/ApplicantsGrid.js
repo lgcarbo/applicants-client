@@ -6,7 +6,7 @@ import { editApplicant } from '../actions/pageActions';
 
 export default class ApplicantsGrid extends React.Component {
 
-    render() {
+    render() {       
         const { data: { loading, error, Applicants } } = this.props;
 
         if(loading) {

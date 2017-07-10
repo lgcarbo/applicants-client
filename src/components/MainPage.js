@@ -1,13 +1,13 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import { CenteredDiv } from '../styled-components/GridWrappers';
-import ApplicantsGridWithData from '../containers/ApplicantsGridWithData'
+import { CenteredDiv } from 'styled-components/GridWrappers';
+import ApplicantsGridContainer from 'containers/ApplicantsGridContainer';
+import NewApplicantButtonContainer from 'containers/NewApplicantButtonContainer';
 
 export default () => (
     <div>
         <CenteredDiv>
-            <Button bsStyle='primary'>New Applicant</Button>
+            <NewApplicantButtonContainer />
         </CenteredDiv>
-        <ApplicantsGridWithData />
+        <ApplicantsGridContainer />
     </div>
 );

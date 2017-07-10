@@ -5,8 +5,6 @@ import { ApolloClient, ApolloProvider, createNetworkInterface } from 'react-apol
 import pageReducer from './reducers/pageReducer';
 import AppContainer from './containers/AppContainer';
 
-console.log(process.env);
-
 const apolloClient = new ApolloClient({
   networkInterface: createNetworkInterface({
     uri: process.env.REACT_APP_SERVER
