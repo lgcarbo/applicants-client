@@ -7,31 +7,11 @@ export default graphql(gql`
         }
     }
 `, {
-    props: ({ ownProps, mutate }) => ({
-        submit: ({LastName, FirstName, BirthDate, Email, IsWorking, EducationLevelId, EducationLevelFinished, YearsOfExperience, DesiredSalary, ContractTypeId, SalaryTypeId, TechnicalSkillIds}) => 
+    props: ({ ownProps: { ApplicantId, endSaveApplicant }, mutate }) => ({
+        beginSaveApplicant: ({LastName, FirstName, BirthDate, Email, IsWorking, EducationLevelId, EducationLevelFinished, YearsOfExperience, DesiredSalary, ContractTypeId, SalaryTypeId, TechnicalSkillIds}) => 
             mutate({
-                variables: { ApplicantId: ownProps.ApplicantId, LastName, FirstName, BirthDate, Email, IsWorking, EducationLevelId, EducationLevelFinished, YearsOfExperience, DesiredSalary, ContractTypeId, SalaryTypeId, TechnicalSkillIds },
-                optimisticResponse: {
-                    __typename: 'Mutation',
-                    submitApplicant: {
-                        __typename: 'Applicant',
-                        ApplicantId: ownProps.ApplicantId,
-                        LastName: LastName,
-                        FirstName: FirstName,
-                        BirthDate: BirthDate, 
-                        Email: Email, 
-                        IsWorking: IsWorking, 
-                        EducationLevelId: EducationLevelId, 
-                        EducationLevelFinished: EducationLevelFinished, 
-                        YearsOfExperience: YearsOfExperience, 
-                        DesiredSalary: DesiredSalary, 
-                        ContractTypeId: ContractTypeId, 
-                        SalaryTypeId: SalaryTypeId,
-                        TechnicalSkillIds: TechnicalSkillIds
-                    }
-                }
-
-            })
+                variables: { ApplicantId, LastName, FirstName, BirthDate, Email, IsWorking, EducationLevelId, EducationLevelFinished, YearsOfExperience, DesiredSalary, ContractTypeId, SalaryTypeId, TechnicalSkillIds },
+            }).then(endSaveApplicant(ApplicantId))
 
         }),
     options: {

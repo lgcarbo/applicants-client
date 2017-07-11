@@ -1,13 +1,11 @@
 import React from 'react';
 import { CenteredDiv } from 'styled-components/GridWrappers';
 import ApplicantsGridContainer from 'containers/ApplicantsGridContainer';
-import NewApplicantButtonContainer from 'containers/NewApplicantButtonContainer';
+import ConfirmDeleteContainer from 'containers/ConfirmDeleteContainer';
 
 export default () => (
     <div>
-        <CenteredDiv>
-            <NewApplicantButtonContainer />
-        </CenteredDiv>
         <ApplicantsGridContainer />
+        <ConfirmDeleteContainer />
     </div>
 );

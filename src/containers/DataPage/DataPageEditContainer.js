@@ -4,6 +4,4 @@ import DataPageQuery from 'connectors/DataPage/DataPageQuery';
 import DataPageMutation from 'connectors/DataPage/DataPageMutation';
 import DataPageRedux from 'connectors/DataPage/DataPageRedux';
 
-//export default DataPageRedux(DataPageWithData);
-
 export default compose(DataPageRedux, DataPageQuery, DataPageMutation)(DataPage);

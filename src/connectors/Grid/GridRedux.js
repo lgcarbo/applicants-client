@@ -1,4 +1,16 @@
 import { connect } from 'react-redux';
+import { editApplicant, askIfDeleteApplicant, changePage } from 'actions/pageActions';
 
-// Use redux to pass in dispatch function to be used in ApplicantsGrid component.
-export default connect ();
+const mapStateToProps = (state) => {
+    return { page: state.page.selectedPage };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return { 
+        changePage: (page, refetch) => dispatch(changePage(page)),
+        editApplicant: (applicantId) => dispatch(editApplicant(applicantId)),
+        askIfDeleteApplicant: (applicantId) => dispatch(askIfDeleteApplicant(applicantId))
+    };
+}
+
+export default connect (mapStateToProps, mapDispatchToProps);

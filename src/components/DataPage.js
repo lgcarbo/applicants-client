@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Grid, Row, Col, Button, Checkbox } from 'react-bootstrap';
-import { saveApplicant, cancelApplicant } from '../actions/pageActions';
 import SalaryTypeContainer from '../containers/SalaryTypeContainer';
 import ContractTypeContainer from '../containers/ContractTypeContainer';
 import EducationLevelContainer from '../containers/EducationLevelContainer';
@@ -36,7 +35,19 @@ export default class DataPage extends React.Component {
         return value ? 1 : 0;
     }
 
-    submitApplicant(applicantId) {
+    getMultipleSelectValues(id) {
+        const options = document.getElementById(id).options;
+        let values = [];
+        for(let i = 0; i < options.length; i++) {
+            if(options[i].selected) {
+                values.push(+options[i].value);
+            }
+        }
+        return values;
+    }
+
+
+    submitApplicant() {
         let result = { 
             LastName: document.getElementById('fgLastName').value,
             FirstName: document.getElementById('fgFirstName').value,
@@ -49,10 +60,9 @@ export default class DataPage extends React.Component {
             DesiredSalary: document.getElementById('fgDesiredSalary').value, 
             ContractTypeId: document.getElementById('fgContractTypeId').value, 
             SalaryTypeId: document.getElementById('fgSalaryTypeId').value,             
-            TechnicalSkillIds: document.getElementById('fgTechnicalSkills').value
+            TechnicalSkillIds: this.getMultipleSelectValues('fgTechnicalSkills')
         }
-        this.props.submit(result)
-            .then(this.props.dispatch(saveApplicant(applicantId)));
+        this.props.beginSaveApplicant(result);
     }
 
     render() {
@@ -126,10 +136,10 @@ export default class DataPage extends React.Component {
                 <Grid>
                     <Row>
                         <Col md={1}>
-                            <Button bsStyle='primary' onClick={ () => this.submitApplicant(Applicant.applicantId) }>Save</Button>
+                            <Button bsStyle='primary' onClick={ () => this.submitApplicant() }>Save</Button>
                         </Col>
                         <Col md={1}>
-                            <Button bsStyle='danger' onClick={ () => this.props.dispatch(cancelApplicant())} >Cancel</Button>
+                            <Button bsStyle='danger' onClick={ this.props.cancelApplicant } >Cancel</Button>
                         </Col>                    
                     </Row>
                 </Grid>

@@ -1,7 +1,15 @@
 import { connect } from 'react-redux';
+import { applicantSaved, cancelApplicant } from 'actions/pageActions';
 
 const mapStateToProps = (state) => {
     return { ApplicantId: state.page.selectedApplicantId }
 };
 
-export default connect(mapStateToProps);
+const mapDispatchToProp = (dispatch) => {
+    return { 
+        endSaveApplicant: (applicantId) => dispatch(applicantSaved(applicantId)),
+        cancelApplicant: () => dispatch(cancelApplicant()) 
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProp);
