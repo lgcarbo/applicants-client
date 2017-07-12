@@ -66,7 +66,7 @@ export default class DataPage extends React.Component {
             Object.assign(Applicant, {
                 LastName: '',
                 FirstName: '',
-                BirthDate: '',
+                BirthDate: '1975-01-01',
                 Email: '',
                 EducationLevel: {
                     EducationLevelId: 1
