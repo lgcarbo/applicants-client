@@ -19,5 +19,5 @@ export default graphql(gql`
             TotalCount
         }
     }`, { 
-        options: ( { page } ) => ( { variables: { page, count: process.env.REACT_APP_ITEMS_PER_PAGE }, fetchPolicy: 'network-only' } )
+        options: ( { page } ) => ( { variables: { page, count: process.env.REACT_APP_ITEMS_PER_PAGE || 5 }, fetchPolicy: 'network-only' } )
      });
